@@ -2,3 +2,11 @@ gitlab.lnxsystems.com
 awx.lnxsystems.com
 minio.lnxsystems.com
 pgdg.lnxsystems.com
+awx.lab.lnxsystems.com
+localhost
+
+[awx]
+awx.lab.lnxsystems.com
+awx.lnxsystemns.com
+
+
