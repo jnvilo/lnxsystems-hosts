@@ -1,0 +1,15 @@
+- hosts: localhost
+  remote_user: jasonvi
+  become: yes
+
+
+  roles:
+    - role: developer
+      vars:
+        dev_user: jasonvi
+      
+
+
+
+        
+
