@@ -1,0 +1,21 @@
+- hosts: pgdg.lnxsystems.com
+  remote_user: ansible
+  become: yes
+
+
+  roles:
+    - role: server-settings
+    - role: postgresql
+      vars: 
+        insecure_pg_hba: true
+        databases:
+          - name: warehouse
+            owner: warehouse_owner
+            password: warehouse_password
+          - name: another_db
+            owner: bob
+            password: bobby
+
+
+        
+

@@ -1,0 +1,122 @@
+- hosts: alpha.lnxsystems.com
+  become: true
+  remote_user: rocky
+  gather_facts: yes
+  pre_tasks:
+    # Configure the server timezone
+    - name: Set timezone to Europe/Helsinki
+      community.general.timezone:
+        name: Europe/Helsinki
+
+    # set firewall rich rule to allow 51515/tcp to allow connection from 84.248.100.12/32
+    - name: Set firewall rich rule to allow 51515/tcp to allow connection from  84.248.100.12/32
+      ansible.posix.firewalld:
+        rich_rule: rule family="ipv4" source address="84.248.100.12/32" port protocol="tcp" port="51515" accept
+        zone: public
+        permanent: true
+        immediate: true
+        state: enabled
+
+    # set firewall rich rule to allow 51515/tcp to allow connection from 194.251.94.205
+    - name: Set firewall rich rule to allow 51515/tcp to allow connection from  194.251.94.205
+      ansible.posix.firewalld:
+        rich_rule: rule family="ipv4" source address="194.251.94.205/32" port protocol="tcp" port="51515" accept
+        zone: public
+        permanent: true
+        immediate: true
+        state: enabled
+      tags:
+        - ssh_from_office
+
+
+
+
+
+    # set firewall rich rule to allow 51515/tcp to allow connection from 84.248.100.12/32
+    - name: Set firewall rich rule to allow 11975/tcp to allow connection from 84.248.100.12/32
+      ansible.posix.firewalld:
+        rich_rule: rule family="ipv4" source address="84.248.100.12/32" port protocol="tcp" port="11975" accept
+        zone: public
+        permanent: true
+        immediate: true
+        state: disabled #Not needed for now
+
+    # disable sshd port 22
+    - name: Disable sshd port 22
+      ansible.posix.firewalld:
+        port: 22/tcp
+        zone: public
+        permanent: true
+        immediate: true
+        state: disabled
+
+    # disable firewalld service=sshd
+    - name: Disable firewalld service=sshd
+      ansible.posix.firewalld:
+        service: sshd
+        zone: public
+        permanent: true
+        immediate: true
+        state: disabled
+
+    # disable firewalld service=sshd
+    - name: Disable firewalld service=ssh
+      ansible.posix.firewalld:
+        service: ssh
+        zone: public
+        permanent: true
+        immediate: true
+        state: disabled
+
+    #  run mkdir -p /pub/elrepo/elrepo/el8/x86_64/ using cmd module
+
+
+    - name: create elrepo path
+      ansible.builtin.command:
+        cmd: mkdir -p /pub/elrepo/elrepo/el8/x86_64/
+        creates: /pub/elrepo/elrepo/el8/x86_64/
+      tags:
+        - elrepo
+
+    - name: sync elrepo
+      ansible.builtin.command:
+        cmd:  rsync -avr  rsync://mirrors.ircam.fr/pub/elrepo/elrepo/el8/x86_64/ /pub/elrepo/elrepo/el8/x86_64/
+      tags:
+        - elrepo
+
+    - name: create elrepo.repo
+      ansible.builtin.copy:
+        content: |
+          [elrepo]
+          name=ELRepo.org Community Enterprise Linux Repository - el8
+          baseurl=file:///pub/elrepo/elrepo/el8/x86_64/
+          enabled=1
+          gpgcheck=1
+          gpgkey=http://elrepo.org/RPM-GPG-KEY-elrepo.org
+        dest: /etc/yum.repos.d/elrepo.repo
+      tags:
+        - elrepo
+
+  roles:
+    - role: libvirtd
+      vars:
+        libvirtd_users:
+          - rocky # this assumes the user exists
+
+    - role: wireguard
+      vars:
+        server_ip: 192.168.10.1
+        server_port: 51515
+        server_private_key: GGXnjehZ1gUxkym60zb8oZfv62YgDVbJN5XNOAk/BGE=
+        server_public_key: GGXnjehZ1gUxkym60zb8oZfv62YgDVbJN5XNOAk/BGE=
+        wg_peers:
+          - allowed_ips: 192.168.10.2
+            public_key: QnRQiltcgoTkAOWJUE54RlVMiJH43adfFu42VIyFe2c=
+
+
+
+
+  #  role: ansible-role-libvirtd
+
+
+
