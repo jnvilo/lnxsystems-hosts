@@ -4,3 +4,12 @@
 [submodule "roles/docker"]
 	path = roles/docker
 	url = git@github.com:jnvilo/ansible-role-docker.git
+[submodule "roles/minikube"]
+	path = roles/minikube
+	url = git@github.com:jnvilo/ansible-role-minikube.git
+[submodule "roles/kvm"]
+	path = roles/kvm
+	url = git@github.com:jnvilo/ansible-role-kvm.git
+[submodule "roles/gitlab"]
+	path = roles/gitlab
+	url = git@github.com:jnvilo/ansible-role-gitlab.git
