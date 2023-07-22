@@ -9,4 +9,8 @@ localhost
 awx.lab.lnxsystems.com
 awx.lnxsystemns.com
 
+[kube]
+kube-1.lnxsystems.com
+kube-2.lnxsystems.com
+kube-3.lnxsystems.com
 
