@@ -1,9 +1,6 @@
 [submodule "roles/letsencrypt-cloudflare"]
 	path = roles/letsencrypt-cloudflare
-	url = git@github.com:jnvilo/ansible-role-letsencrypt-cloudflare.git
-[submodule "roles/docker"]
-	path = roles/docker
-	url = git@github.com:jnvilo/ansible-role-docker.git
+	url = git@github.com:jnvilo/ansible-role-letsencrypt-cloudflare
 [submodule "roles/minikube"]
 	path = roles/minikube
 	url = git@github.com:jnvilo/ansible-role-minikube.git
@@ -13,3 +10,7 @@
 [submodule "roles/gitlab"]
 	path = roles/gitlab
 	url = git@github.com:jnvilo/ansible-role-gitlab.git
+
+[submodule "roles/docker"]
+	path = roles/docker
+	url = git@github.com:jnvilo/ansible-role-docker.git
