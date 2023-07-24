@@ -17,3 +17,6 @@
 [submodule "roles/k3s"]
 	path = roles/k3s
 	url = git@github.com:jnvilo/ansible-role-k3s.git
+[submodule "roles/infra-services"]
+	path = roles/infra-services
+	url = git@github.com:jnvilo/ansible-role-infra-services.git
