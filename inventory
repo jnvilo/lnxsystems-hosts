@@ -5,6 +5,7 @@ pgdg.lnxsystems.com
 awx.lab.lnxsystems.com
 localhost
 kube-template.lnxsystems.com
+infra-1.lnxsystems.com
 
 [awx]
 awx.lab.lnxsystems.com
