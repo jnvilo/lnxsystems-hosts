@@ -4,6 +4,7 @@ minio.lnxsystems.com
 pgdg.lnxsystems.com
 awx.lab.lnxsystems.com
 localhost
+kube-template.lnxsystems.com
 
 [awx]
 awx.lab.lnxsystems.com
