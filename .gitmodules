@@ -14,3 +14,6 @@
 [submodule "roles/docker"]
 	path = roles/docker
 	url = git@github.com:jnvilo/ansible-role-docker.git
+[submodule "roles/k3s"]
+	path = roles/k3s
+	url = git@github.com:jnvilo/ansible-role-k3s.git
