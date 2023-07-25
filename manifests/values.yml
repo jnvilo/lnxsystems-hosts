@@ -1,0 +1,30 @@
+image:
+  repository: "cloudifyplatform/community-cloudify-manager-aio"
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer
+  name: cloudify-manager-aio
+  rabbitmq:
+    port: 5671
+  http:
+    port: 80
+  https:
+    port: 443
+  internal_rest:
+    port: 53333
+
+nodeSelector: {}
+
+
+nodeSelector: {}
+# nodeSelector:
+#   nodeType: onDemand
+
+
+readinessProbe:
+  enabled: true
+  port: 80
+  path: /console
+  initialDelaySeconds: 10

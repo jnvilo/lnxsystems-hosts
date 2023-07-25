@@ -1,0 +1,10 @@
+---
+apiVersion: awx.ansible.com/v1beta1
+kind: AWX
+metadata:
+  name: awx
+  namespace: awx
+spec:
+  service_type: LoadBalancer
+  # default nodeport_port is 30080
+  nodeport_port: 30080
